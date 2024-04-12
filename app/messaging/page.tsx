@@ -1,0 +1,105 @@
+import Link from 'next/link'
+import React from 'react'
+import { AiFillMessage, AiOutlineUser, AiOutlineSend } from "react-icons/ai"
+
+const messaging = () => {
+  return (
+    <div className="h-screen bg-white place-content-center px-[10%]">
+         <div className="flex flex-col h-[80%] bg-gray-100">
+            {/* Navbar */}
+            <div className="flex items-center justify-center gap-[15%] px-4 py-2 shadow">
+                <div className="flex text-5xl items-center text-[#8ecae6] space-x-4 cursor-pointer">
+                    <AiFillMessage />
+                </div>
+                <div className="flex items-center space-x-4">
+                    <Link href="/">
+                        <img src="/logo.png" alt="Logo" className='w-10 relative cursor-pointer' />
+                    </Link>
+                </div>
+                <div className="flex items-center text-xl text-black space-x-4">
+                    <Link href="/profile">
+                        <AiOutlineUser />
+                    </Link>
+                </div>
+            </div>
+
+            {/* Main Chat Area */}
+            <div className="flex flex-1 overflow-hidden shadow-lg">
+                {/* Recent Chats Sidebar */}
+                <div className="w-1/3 bg-white overflow-y-auto">
+                    <div className="flex flex-col">
+                        {/* Search bar */}
+                        <div className="p-4">
+                            <div className="flex items-center rounded-full bg-gray-200">
+                                <input className="w-full rounded-full bg-transparent p-2 text-sm placeholder-gray-500 focus:outline-none" placeholder="Search Chats" />
+                                <button className="p-2 mr-2">
+                                {/* Search Icon */}
+                                </button>
+                            </div>
+                        </div>
+                        {/* Chat list header */}
+                        <div className="px-4 py-2 border-b border-gray-200">
+                            <h2 className="text-lg font-semibold text-gray-800">Recent Chats</h2>
+                        </div>
+                        {/* Chat list items */}
+                        <div className="flex flex-col">
+                            {/* Each chat item */}
+                            <div className="flex items-center px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-50">
+                                <div className="mr-4">
+                                    <span className="block w-10 h-10 bg-gray-300 rounded-full"></span>
+                                </div>
+                                <div className="flex flex-col flex-1 min-w-0">
+                                    <span className="text-sm font-medium text-gray-800 truncate">John</span>
+                                    <span className="text-xs text-gray-500 truncate">It was nice talking...</span>
+                                </div>
+                                <div className="ml-4">
+                                    <span className="text-xs text-gray-500">11:30</span>
+                                </div>
+                            </div>
+                        {/* Repeat the chat item div for each chat in your list */}
+                        {/* ... */}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Conversation Section */}
+                <div className="w-2/3 flex flex-col">
+                    {/* Conversation Header */}
+                    <div className="flex items-center justify-between px-4 py-2 border-b border-gray-300 bg-white">
+                        {/* Profile Picture */}
+                        <div className="flex items-center space-x-2">
+                            <div className="w-10 h-10 bg-gray-300 rounded-full">
+                                {/**image profile blurry to hide*/}
+                            </div>
+                            <div>
+                                <span className="text-sm font-medium text-gray-800">John</span>
+                            </div>
+                        </div>
+                        {/* Common Interest Tag */}
+                        {/* Reveal Button */}
+                        <button className="text-xs bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-2 rounded">Reveal</button>
+                        {/*common interest*/}
+                    </div>
+                    <div className="text-xs bg-blue-100 text-blue-800 py-1 px-2 rounded-t">Common interest: {/*Common interest*/}</div>
+                    
+
+                    {/* Messages Area */}
+                    <div className="flex-1 px-4 py-2 overflow-y-auto">
+                        {/* ... Your code for the messages goes here ... */}
+                    </div>
+
+                    {/* Message Input */}
+                    <div className="flex items-center justify-between px-4 py-2 border-t border-gray-300 bg-white">
+                        <input className="flex-1 text-sm px-3 py-1 border-2 border-gray-300 rounded-full focus:outline-none focus:border-blue-500" placeholder="Type your message here..." />
+                        <button className="ml-2 text-lg text-gray-600">
+                            <AiOutlineSend />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  )
+}
+
+export default messaging
