@@ -71,9 +71,11 @@ const Login = () => {
                 <div className="text text-center mb-4">
                     Enter your personal details and start this journey to discover your next best friends with SocialNation
                 </div>
-                <button className="bg-yellow-400 text-black rounded-md py-2 px-4 hover:bg-blue-700 transition duration-300">
-                    SIGN UP
-                </button>
+                <Link href='/signup'>
+                    <button className="bg-yellow-400 text-black rounded-md py-2 px-4 hover:bg-blue-700 transition duration-300">
+                        SIGN UP
+                    </button>
+                </Link>
             </div>
         </div>
     </div>

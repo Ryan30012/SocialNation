@@ -13,8 +13,8 @@ type user = {
 const profile = () => {
     const [req , setReq] = useState<Boolean>(false)
     const [selectedUser, setSelectedUser] = useState<user | undefined>();
+    const [isBlured, setIsBlured] = useState(true); 
 
-  // Example users' data
   const users = [
     {
       id: 1,
@@ -44,10 +44,9 @@ const profile = () => {
   return (
     <div className="h-screen bg-white place-content-center px-[10%]">
          <div className="flex flex-col h-[80%] bg-gray-100">
-            {/* Navbar */}
             <div className="flex items-center justify-center gap-[15%] px-4 py-2 shadow">
                 <div className="flex items-center text-xl text-black space-x-4">
-                    <Link href="/">
+                    <Link href="/messaging">
                         <AiFillMessage />
                     </Link>
                 </div>
@@ -108,41 +107,42 @@ const profile = () => {
             {!req && (
                 <div className="flex overflow-hidden shadow-lg bg-white w-[90%] mx-[5%] mt-[3%] rounded-lg flex-col">
                     <div className="flex flex-col p-6">
-                    <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-xl font-bold text-gray-800">Calvin</h2>
-                    </div>
+                        <div className="flex items-center mb-4">
+                            <img src="/profilePics/1.jpg" alt="Profile Picture" className={`w-[90px] h-[90px] rounded-full mr-4 ${isBlured ? 'blur-[5px]' : ''}`} />
+                            <h2 className="text-xl font-bold text-gray-800">Calvin</h2>
+                        </div>
                     
-                    <div className="mb-6">
-                        <p className="text-sm text-gray-600">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                    </div>
-                    <div className="interests flex justify-center items-start bg-white p-6 border border-gray-200 rounded-lg shadow">
-                        <div className="w-[50%]">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Interests</h3>
-                        <ul className="list-inside list-disc text-sm text-gray-600 space-y-1">
-                            <li>Football</li>
-                            <li>Attack on Titan</li>
-                            <li>Game of Thrones</li>
-                            <li>Tech</li>
-                        </ul>
+                        <div className="mb-6">
+                            <p className="text-sm text-gray-600">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
                         </div>
-                        <div className=" w-[50%]">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Common Interests</h3>
-                        <ul className="list-inside list-disc text-sm text-gray-600 space-y-1">
-                            <li>Reading</li>
-                            <li>Anime</li>
-                        </ul>
+                        <div className="interests flex justify-center items-start bg-white p-6 border border-gray-200 rounded-lg shadow">
+                            <div className="w-[50%]">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Interests</h3>
+                                <ul className="list-inside list-disc text-sm text-gray-600 space-y-1">
+                                    <li>Football</li>
+                                    <li>Attack on Titan</li>
+                                    <li>Game of Thrones</li>
+                                    <li>Tech</li>
+                                </ul>
+                            </div>
+                            <div className=" w-[50%]">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Common Interests</h3>
+                                <ul className="list-inside list-disc text-sm text-gray-600 space-y-1">
+                                    <li>Reading</li>
+                                    <li>Anime</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div className="flex items-center justify-center bg-white p-4 gap-[50%] shadow rounded-b-lg">
-                    <button className="bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full p-3 transition duration-300 ease-in-out focus:outline-none">
-                        <AiOutlineUserAdd className="text-2xl" />
-                    </button>
-                    <button className="bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full p-3 transition duration-300 ease-in-out focus:outline-none">
-                        <AiOutlineClose className="text-2xl" />
-                    </button>
+                        <button className="bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full p-3 transition duration-300 ease-in-out focus:outline-none">
+                            <AiOutlineUserAdd className="text-2xl" />
+                        </button>
+                        <button className="bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full p-3 transition duration-300 ease-in-out focus:outline-none">
+                            <AiOutlineClose className="text-2xl" />
+                        </button>
                     </div>
                 </div>
             )}
