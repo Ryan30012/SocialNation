@@ -15,7 +15,7 @@ const ProfilePage = () => {
     };
     
   return (
-    <div className="h-screen bg-white overflow-hidden px-[5%] py-[50px]">
+    <div className="h-screen bg-white overflow-hidden px-[10%] py-[50px]">
         <div className="flex flex-col h-full bg-gray-100 overflow-auto">
             <div className="flex items-center justify-center gap-[15%] px-4 py-2 shadow">
                 <div className="flex items-center text-xl text-black space-x-4">
@@ -23,31 +23,31 @@ const ProfilePage = () => {
                             <AiFillMessage />
                     </Link>
                 </div>
-                <div className="flex text-5xl items-center text-[#8ecae6] space-x-4 cursor-pointer">
-                    <Link href="/">
-                            <img src="/logo.png" alt="Logo" className='w-[80px] relative cursor-pointer' />
+                <div className="flex items-center text-xl text-black space-x-4">
+                    <Link href="/recommended">
+                            <img src="/logo.png" alt="Logo" className='w-12 relative cursor-pointer' />
                     </Link>
                 </div>
-                <div className="flex items-center text-xl text-black space-x-4">
+                <div className="flex text-5xl items-center text-[#8ecae6] space-x-4 cursor-pointer">
                     <Link href="/profile">
                             <AiOutlineUser />
                     </Link>
                 </div>
             </div>
             <div className="p-10">
-                <div className="flex items-center mb-4">
+                <div className="pl-5 flex items-center mb-4">
                     <div className="border-4 border-orange-200 rounded-full p-1">
-                        <img className="w-32 h-32 rounded-full object-cover" src="/path-to-profile.jpg" alt="Profile" />
+                        <img className="w-20 h-20 rounded-full object-cover" src="/path-to-profile.jpg" alt="Profile" />
                     </div>
                     <div className="flex flex-col justify-center mx-4 flex-grow">
-                        <span className="text-3xl font-bold text-gray-800">yournamehere</span>
-                        <span className="text-sm text-gray-500">Bio...</span>
+                        <span className="text-xl font-bold text-gray-800">yournamehere</span>
+                        <span className="text-md mt-2 text-gray-500">Bio...</span>
                     </div>
                     <div className="flex flex-col items-end">
                       <button className="text-gray-500 hover:text-gray-700 mb-2">
                           <AiOutlineEdit className="text-2xl" />
                       </button>
-                      <button className="bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full py-3 px-5">
+                      <button className="bg-blue-100 text-sm hover:bg-blue-200 text-blue-600 rounded-full py-3 px-5">
                           Upload a pic
                       </button>
                     </div>
@@ -59,7 +59,7 @@ const ProfilePage = () => {
                         key={index}
                         src={`/profilePics/${imageName}`}
                         alt={`Image ${index}`}
-                        className="w-full h-[400px] bg-gray-200 object-cover rounded-sm cursor-pointer"
+                        className="w-full h-[200px] bg-gray-200 object-cover rounded-sm cursor-pointer"
                         onClick={() => handleImageClick(`/profilePics/${imageName}`)}
                         />
                     ))}

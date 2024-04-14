@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, {useState} from "react";
 
 interface MultiSelectDropdownProps {
   options: string[];
+  onSelectionChange: (selected: string[]) => void; // Add this line
 }
 
-const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ options }) => {
+const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ options, onSelectionChange }) => {
+
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -13,11 +15,12 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({ options }) =>
   };
 
   const handleOptionClick = (option: string) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
-    } else {
-      setSelectedOptions([...selectedOptions, option]);
-    }
+    const newSelectedOptions = selectedOptions.includes(option)
+      ? selectedOptions.filter(item => item !== option)
+      : [...selectedOptions, option];
+
+    setSelectedOptions(newSelectedOptions);  // Update the state
+    onSelectionChange(newSelectedOptions);   // Notify the parent component
   };
 
   return (

@@ -1,12 +1,25 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillMessage, AiOutlineUser, AiOutlineSend } from "react-icons/ai"
+import { RiChatVoiceLine } from 'react-icons/ri'
+
+type user = {
+    id: number;
+    username: String;
+    bio: String;
+    interests: String[];
+    profilePic: String; 
+}
 
 const messaging = () => {
+   
+    const [isBlured, setIsBlured] = useState<boolean>(true)
+
   return (
     <div className="h-screen bg-white place-content-center px-[10%]">
          <div className="flex flex-col h-[80%] bg-gray-100">
-            {/* Navbar */}
+            
             <div className="flex items-center justify-center gap-[15%] px-4 py-2 shadow">
                 <div className="flex text-5xl items-center text-[#8ecae6] space-x-4 cursor-pointer">
                     <AiFillMessage />
@@ -23,13 +36,12 @@ const messaging = () => {
                 </div>
             </div>
 
-            {/* Main Chat Area */}
             <div className="flex flex-1 overflow-hidden shadow-lg">
                 <div className="w-1/3 bg-white overflow-y-auto">
                     <div className="flex flex-col">
                         <div className="p-4">
                             <div className="flex items-center rounded-full bg-gray-200">
-                                <input className="w-full rounded-full bg-transparent p-2 text-sm placeholder-gray-500 focus:outline-none" placeholder="Search Chats" />
+                                <input className="w-full text-black rounded-full bg-transparent p-2 pl-5 text-sm placeholder-gray-500 focus:outline-none" placeholder="Search Chats" />
                                 <button className="p-2 mr-2">
                                 </button>
                             </div>
@@ -40,7 +52,9 @@ const messaging = () => {
                         <div className="flex flex-col">
                             <div className="flex items-center px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-50">
                                 <div className="mr-4">
-                                    <span className="block w-10 h-10 bg-gray-300 rounded-full"></span>
+                                    <div className="">
+                                        <img className={`w-12 h-12 rounded-full object-cover ${isBlured? `blur-[5px]`: ``} `} src="/profilePics/1.jpg" alt="Profile" />
+                                    </div>
                                 </div>
                                 <div className="flex flex-col flex-1 min-w-0">
                                     <span className="text-sm font-medium text-gray-800 truncate">John</span>
@@ -57,7 +71,8 @@ const messaging = () => {
                 <div className="w-2/3 flex flex-col">
                     <div className="flex items-center justify-between px-4 py-2 border-b border-gray-300 bg-white">
                         <div className="flex items-center space-x-2">
-                            <div className="w-10 h-10 bg-gray-300 rounded-full">
+                            <div className="">
+                                <img className={`w-12 h-12 rounded-full object-cover ${isBlured? `blur-[5px]`: ``} `} src="/profilePics/1.jpg" alt="Profile" />
                             </div>
                             <div>
                                 <span className="text-sm font-medium text-gray-800">John</span>
@@ -72,7 +87,10 @@ const messaging = () => {
 
                     <div className="flex items-center justify-between px-4 py-2 border-t border-gray-300 bg-white">
                         <input className="flex-1 text-sm px-3 py-1 border-2 border-gray-300 rounded-full focus:outline-none focus:border-blue-500" placeholder="Type your message here..." />
-                        <button className="ml-2 text-lg text-gray-600">
+                        <button className="ml-2 text-lg text-gray-600 cursor-pointer">
+                            <RiChatVoiceLine />
+                        </button>
+                        <button className="ml-2 text-lg text-gray-600 cursor-pointer">
                             <AiOutlineSend />
                         </button>
                     </div>
