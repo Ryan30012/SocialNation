@@ -1,18 +1,22 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { AiFillFacebook, AiFillGoogleCircle } from "react-icons/ai"
 import MultiSelectDropdown from "../../components/MultiSelectDropdown"
+import { useRouter } from 'next/navigation'
 
 
 const Signup = () => {
     const [interests, setInterests] = useState<string[]>([]); // This will store the selected interests
+    const [page2, setpage2] = useState<boolean>(false);
+
+    const router = useRouter()
 
     const [formData, setFormData] = useState({
         username: '',
         email: '',
-        password: '',
-        confirmPassword: '',
+        pw: '',
+        cpw: '',
         bio: '',
         country: '',
         state: '',
@@ -51,11 +55,13 @@ const Signup = () => {
         'Arts & Crafts'
       ];
 
-    const [page2, setpage2] = useState<boolean>(true);
 
-    const handleFirstCreate = (event:any) => {
-        if(formData.confirmPassword != formData.password){
+    const handleFirstCreate = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        
+        if(formData.cpw != formData.pw){
             alert('The confirmation of the password should be the same as the password')
+            setpage2(false)
         }
         else{
             setpage2(true)
@@ -63,29 +69,32 @@ const Signup = () => {
         
     }
 
-    const handleSubmit = async (event:any) => {
+    const handleCancel = () => {
+        setpage2(false)
+        router.refresh()
+    }
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {
-          const response = await fetch('/api/yourEndpoint', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-    
-          const data = await response.json();
-    
-          if (response.ok) {
-            console.log('Success:', data);
-          } else {
-            console.error('API Error:', data.error);
-          }
+            const response = await fetch('/api/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.json();
+            console.log('Server response:', result);
+            
         } catch (error) {
-          console.error('Request Error:', error);
+            console.error('Failed to submit user data:', error);
         }
-      };
+    };
 
   return (
     <div className="h-screen bg-[#ffffff] overflow-hidden">
@@ -101,10 +110,10 @@ const Signup = () => {
                 </div>
             </div>
         </div>
-        <form action="" className="inputs">
+        <form onSubmit={handleSubmit} className="inputs">
             {!page2 && (
-                <div className="h-screen text-[#023047] flex justify-center items-center px-4">
-                    <div className="w-full h-[60%] md:w-1/2 flex flex-col justify-center items-center bg-indigo-600 p-8 rounded-l-lg shadow-lg">
+                <div className="h-screen flex justify-center items-center px-[10%]">
+                    <div className="w-full h-[60%] text-[#ffffff] md:w-1/2 flex flex-col justify-center items-center bg-indigo-600 p-8 rounded-l-lg shadow-lg">
                         <div className="title text-2xl font-bold text-center mb-4">
                             Welcome Back!
                         </div>
@@ -117,7 +126,7 @@ const Signup = () => {
                             </button>
                         </Link>
                     </div>
-                    <div className="w-full h-[60%] md:w-1/2 flex flex-col justify-center items-center bg-white p-8 rounded-r-lg shadow-lg">
+                    <div className="w-full h-[60%] text-black md:w-1/2 flex flex-col justify-center items-center bg-white p-8 rounded-r-lg shadow-lg">
                         <div className="title text-2xl font-bold mb-4">
                             Sign In
                         </div>
@@ -167,34 +176,34 @@ const Signup = () => {
                             <div className="md:col-span-2">
                                 <label className="text-gray-800 font-semibold">Country / region</label>
                                 <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                <input name="country" id="country" placeholder="Country" className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent focus:border-indigo-300 focus:ring focus:ring-indigo-200" />
+                                <input name="country" id="country" placeholder="Country" className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent " />
                                 </div>
                             </div>
                     
                             <div className="md:col-span-2">
                                 <label className="text-gray-800 font-semibold">State / province</label>
                                 <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                <input name="state" id="state" placeholder="State" className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent focus:border-indigo-300 focus:ring focus:ring-indigo-200" />
+                                <input name="state" id="state" placeholder="State" className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent " />
                                 </div>
                             </div>
                     
                             <div className="md:col-span-2">
                                 <label className="text-gray-800 font-semibold">City</label>
-                                <input type="text" name="city" id="city" className="h-10 border border-gray-300 rounded px-4 w-full bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200" />
+                                <input type="text" name="city" id="city" className="h-10 border border-gray-300 rounded px-4 w-full bg-gray-50 " />
                             </div>
                     
                             <div className="md:col-span-2">
                                 <label className="text-gray-800 font-semibold">Zipcode</label>
-                                <input type="text" name="zipcode" id="zipcode" className="h-10 border border-gray-300 rounded px-4 w-full bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200" />
+                                <input type="text" name="zipcode" id="zipcode" className="h-10 border border-gray-300 rounded px-4 w-full bg-gray-50" />
                             </div>
                     
                             <div className='md:col-span-2 flex justify-end items-end pt-4'>
-                                <button className="bg-indigo-500 text-white rounded-lg py-2 px-4 hover:bg-indigo-600 transition duration-300">
+                                <button type="submit" className="bg-indigo-500 text-white rounded-lg py-2 px-4 hover:bg-indigo-600 transition duration-300">
                                 Create
                                 </button>
                             </div>
                             <div className='md:col-span-2 flex justify-start items-start pt-4'>
-                                <button className="bg-gray-400 text-white rounded-lg py-2 px-4 hover:bg-gray-500 transition duration-300">
+                                <button onClick={handleCancel} className="bg-gray-400 text-white rounded-lg py-2 px-4 hover:bg-gray-500 transition duration-300">
                                 Cancel
                                 </button>
                             </div>
