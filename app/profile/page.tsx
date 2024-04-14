@@ -37,11 +37,11 @@ const ProfilePage = () => {
             <div className="p-10">
                 <div className="pl-5 flex items-center mb-4">
                     <div className="border-4 border-orange-200 rounded-full p-1">
-                        <img className="w-20 h-20 rounded-full object-cover" src="/path-to-profile.jpg" alt="Profile" />
+                        <img className="w-20 h-20 rounded-full object-cover" src="/profilePics/1.jpg" alt="Profile" />
                     </div>
                     <div className="flex flex-col justify-center mx-4 flex-grow">
-                        <span className="text-xl font-bold text-gray-800">yournamehere</span>
-                        <span className="text-md mt-2 text-gray-500">Bio...</span>
+                        <span className="text-xl font-bold text-gray-800">JohnDie</span>
+                        <span className="text-md w-[90%] mt-2 text-gray-500">This is a test for the soen 357 project {`=\>`} SocialNation</span>
                     </div>
                     <div className="flex flex-col items-end">
                       <button className="text-gray-500 hover:text-gray-700 mb-2">

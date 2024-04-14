@@ -149,7 +149,7 @@ const profile = () => {
                         {/* Profile image and name */}
                         <div className="flex items-center w-full mb-4">
                             <div className="border-4 border-orange-200 rounded-full p-1">
-                                <img className="w-32 h-32 rounded-full object-cover" src="/path-to-profile.jpg" alt="Profile" />
+                                <img className="w-20 h-20 rounded-full object-cover blur-[5px]" src="/profilePics/1.jpg" alt="Profile" />
                             </div>
                             <div className="flex flex-col justify-center mx-10 flex-grow">
                                 <span className="text-3xl font-bold text-gray-800">{selectedUser.username}</span>
