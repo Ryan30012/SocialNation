@@ -54,7 +54,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="grid grid-cols-5 gap-4 pt-10">
-                    {['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'].map((imageName, index) => (
+                    {['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg','1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg','1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'].map((imageName, index) => (
                         <img
                         key={index}
                         src={`/profilePics/${imageName}`}
@@ -63,10 +63,8 @@ const ProfilePage = () => {
                         onClick={() => handleImageClick(`/profilePics/${imageName}`)}
                         />
                     ))}
-                    {/* More images */}
                     </div>
 
-                    {/* Image Modal */}
                     {selectedImage && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-50"  onClick={handleCloseClick}>
                         <div className="bg-white p-2 rounded-lg shadow-lg">

@@ -20,7 +20,7 @@ const Signup = () => {
         'Arts & Crafts'
       ];
 
-    const [page2, setpage2] = useState<boolean>(true);
+    const [page2, setpage2] = useState<boolean>(false);
 
     const goPage2 = () => {
         setpage2(true)

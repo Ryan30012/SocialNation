@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { AiFillMessage, AiOutlineUser, AiOutlineSend, AiOutlineUserAdd, AiOutlineClose } from "react-icons/ai"
+import { AiFillMessage, AiOutlineUser, AiOutlineSend, AiOutlineUserAdd, AiOutlineClose, AiOutlineEdit } from "react-icons/ai"
 
 type user = {
     id: number;
@@ -14,6 +14,9 @@ const profile = () => {
     const [req , setReq] = useState<Boolean>(false)
     const [selectedUser, setSelectedUser] = useState<user | undefined>();
     const [isBlured, setIsBlured] = useState(true); 
+    const [showIncomingRequests, setShowIncomingRequests] = useState(false);
+    const [showSentRequests, setShowSentRequests] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
 
   const users = [
     {
@@ -30,13 +33,42 @@ const profile = () => {
     }
     // ... more users
   ];
+  const sent = [
+    {
+      id: 1,
+      username: '_Bob',
+      bio: 'Lorem ipsum dolor sit amet...',
+      interests: ['Football', 'Attack on Titan', 'Game of Thrones', 'Tech'],
+    },
+    {
+      id: 2,
+      username: '_Bobby',
+      bio: 'Consectetur adipiscing elit...',
+      interests: ['Painting', 'Sculpture', 'Classical Music'],
+    }
+    // ... more users
+  ];
+    const handleImageClick = (imageSrc:any) => {
+      setSelectedImage(imageSrc);
+    };
+  
+    const handleCloseImageClick = () => {
+      setSelectedImage(null);
+    };
 
-  // Function to select user
-  const handleUserClick = (user: user) => {
+
+  const handleToggleIncomingRequests = () => {
+    setShowIncomingRequests(!showIncomingRequests);
+  };
+
+  const handleToggleSentRequests = () => {
+    setShowSentRequests(!showSentRequests);
+  };
+
+  const handleUserClick = (user:any) => {
     setSelectedUser(user);
   };
 
-  // Function to close the profile card
   const handleCloseClick = () => {
     setSelectedUser(undefined);
   };
@@ -70,8 +102,14 @@ const profile = () => {
                     Find New Friends
                 </div>
             </div>
-            {req && users.map((user) => (
-                <div key={user.id} className="flex justify-between items-center p-4 shadow-md mb-2">
+            {req && (
+                <div className="cursor-pointer text-black p-4 shadow-md mb-2" onClick={handleToggleIncomingRequests}>
+                    Incoming Requests
+                </div>
+            )}
+            {/* Incoming requests list */}
+            {req && showIncomingRequests && users.map((user) => (
+                <div key={user.id} className="flex w-[95%] mx-[2.5%] justify-between items-center p-4 shadow-md mb-2 bg-white">
                 <span className="cursor-pointer text-black" onClick={() => handleUserClick(user)}>
                     {user.username}
                 </span>
@@ -81,29 +119,67 @@ const profile = () => {
                 </div>
                 </div>
             ))}
+            {req && (
+                <div className="cursor-pointer text-black p-4 shadow-md mb-2" onClick={handleToggleSentRequests}>
+                    Sent Requests
+                </div>
+            )}
+            {/* Incoming requests list */}
+            {req && showSentRequests && sent.map((user) => (
+                <div key={user.id} className="flex w-[95%] mx-[2.5%] justify-between items-center p-4 shadow-md mb-2 bg-white rounded-lg">
+                    <span className="cursor-pointer text-black font-medium" onClick={() => handleUserClick(user)}>
+                        {user.username}
+                    </span>
+                    <div>
+                        <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2 transition duration-300">
+                            Accept
+                        </button>
+                        <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Reject
+                        </button>
+                    </div>
+                </div>
+            ))}
+
 
             {/* Profile card */}
             {req && selectedUser && (
-                <div className="fixed inset-0 bg-black text-black w-screen bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white w-[60%] p-6 rounded-lg shadow-lg relative">
-                        <button className="absolute top-4 text-2xl right-4" onClick={handleCloseClick}>
-                        &times;
-                        </button>
-                        <h3 className="text-xl font-bold mb-2">{selectedUser.username}</h3>
-                        <p className="text-gray-600 mb-4">{selectedUser.bio}</p>
-                        <div className="flex">
-                            <div className="mr-4">
-                                <h4 className="font-semibold">Interests</h4>
-                                <ul className="list-disc list-inside">
-                                {selectedUser.interests.map((interest, index) => (
-                                    <li key={index}>{interest}</li>
-                                ))}
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-10" onClick={() => setSelectedUser(undefined)}>
+                    <div className="bg-white w-[80%] max-w-2xl p-6 rounded-lg shadow-lg relative flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
+                        {/* Profile image and name */}
+                        <div className="flex items-center w-full mb-4">
+                            <div className="border-4 border-orange-200 rounded-full p-1">
+                                <img className="w-32 h-32 rounded-full object-cover" src="/path-to-profile.jpg" alt="Profile" />
+                            </div>
+                            <div className="flex flex-col justify-center mx-10 flex-grow">
+                                <span className="text-3xl font-bold text-gray-800">{selectedUser.username}</span>
+                                <span className="text-lg text-gray-500">{selectedUser.bio}</span>
+                            </div>
+                        </div>
+                        {/* Interests list */}
+                        
+                        <div className="interests w-[80%] flex justify-center items-start bg-white p-6 border border-gray-200 rounded-lg shadow">
+                            <div className="w-[50%]">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Interests</h3>
+                                <ul className="list-inside list-disc text-sm text-gray-600 space-y-1">
+                                    <li>Football</li>
+                                    <li>Attack on Titan</li>
+                                    <li>Game of Thrones</li>
+                                    <li>Tech</li>
+                                </ul>
+                            </div>
+                            <div className=" w-[50%]">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Common Interests</h3>
+                                <ul className="list-inside list-disc text-sm text-gray-600 space-y-1">
+                                    <li>Reading</li>
+                                    <li>Anime</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
+
             {!req && (
                 <div className="flex overflow-hidden shadow-lg bg-white w-[90%] mx-[5%] mt-[3%] rounded-lg flex-col">
                     <div className="flex flex-col p-6">
