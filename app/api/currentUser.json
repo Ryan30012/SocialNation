@@ -1,0 +1,14 @@
+{
+    "data":[{ 
+        "id": 1, 
+        "text": "Hello, how are you?", 
+        "sender": "John", 
+        "timestamp": "10:30 AM" 
+    },
+    { 
+        "id": 2, 
+        "text": "Hi, I'm fine, thanks! And you?", 
+        "sender": "Jane", 
+        "timestamp": "10:30 AM"  
+    }]
+}
