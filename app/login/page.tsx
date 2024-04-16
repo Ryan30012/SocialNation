@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React, { FormEvent, useState } from 'react'
 import { AiFillFacebook, AiFillGoogleCircle } from "react-icons/ai";
+import { writeCurrUser } from '../api/route';
 
 const Login = () => {
 
@@ -10,21 +11,36 @@ const Login = () => {
     const [pw, setPw] = useState('')
     const router = useRouter();
     
-    const login = {
-        email: "Staffy@gmail.com",
-        password: "Test123@"
-    }
+    const email1 = "Staffy@gmail.com"
+    const password1 = "Test123@"
+    const email2 = "test@gmail.com"
+    const password2 = "Test123@"
 
-    function onHandleClick(e: { preventDefault: () => void; }) {
+    function onHandleClick(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault(); // Prevent default form submission behavior
     
-        if (email === login.email && pw === login.password) {
-          router.push('/profile');
-        } else {
+        if (email === email1 && pw === password1) {
+            // Use the router to navigate with the email as a query parameter
+            /*router.push({
+              pathname: '/profile',
+              query: { email1 }, // Pass the email in the query object
+            });*/
+            writeCurrUser('staffy')
+            router.push("/profile")
+            
+        } else if (email === email2 && pw === password2) {
+            // Use the router to navigate with the email as a query parameter
+            /*router.push({
+              pathname: '/profile',
+              query: { email2 }, // Pass the email in the query object
+            });*/
+            writeCurrUser('test')
+            router.push("/profile")
+          } else {
           setEmail('');
           setPw('');
         }
-      }
+    }
 
   return (
     <div className="h-screen bg-[#ffffff] overflow-hidden">
@@ -61,7 +77,7 @@ const Login = () => {
                     <input type="password" name='pw' placeholder='Password' className="border rounded-md p-2" value={pw} onChange={(e) => setPw(e.target.value)}/>
                 </div>
                 <form onSubmit={onHandleClick}>
-                    <button className="bg-[#fb8500] text-white rounded-md py-2 px-4 mt-4 hover:bg-blue-700 transition duration-300" onClick={onHandleClick}>Sign In</button>
+                    <button className="bg-[#fb8500] text-white rounded-md py-2 px-4 mt-4 hover:bg-blue-700 transition duration-300" type='submit'>Sign In</button>
                 </form>
             </div>
             <div className="message pl-[7.5%] h-[50%] flex flex-col justify-center items-center md:w-1/2 bg-indigo-600 text-white p-8 rounded-r-lg">

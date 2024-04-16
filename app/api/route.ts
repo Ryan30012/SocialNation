@@ -11,10 +11,8 @@ type Data = {
 
 export async function writeCurrUser (user:any) {
     const filePath = path.join(process.cwd(), 'app', 'storage', 'curUser.json');
-    const jsonData = fs.writeFileSync(filePath, 'utf8');
-    const data: Data[] = JSON.parse(user);
-    console.log(data);
-    return data
+    const jsonData = fs.writeFileSync(filePath, user, 'utf8');
+    console.log(user);
 }
 
 export async function getUsers() {
@@ -28,7 +26,7 @@ export async function getUsers() {
 export async function getCurrUser() {
     const filePath = path.join(process.cwd(), 'app', 'storage', 'curUser.json');
     const jsonData = fs.readFileSync(filePath, 'utf8');
-    const data: Data[] = JSON.parse(jsonData);
+    const data = jsonData;
     console.log(data);
     return data
 }
