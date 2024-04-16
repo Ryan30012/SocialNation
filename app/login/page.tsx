@@ -13,8 +13,8 @@ const Login = () => {
     
     const email1 = "Staffy@gmail.com"
     const password1 = "Test123@"
-    const email2 = "test@gmail.com"
-    const password2 = "Test123@"
+    const email2 = "john@gmail.com"
+    const password2 = "test"
 
     function onHandleClick(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault(); // Prevent default form submission behavior
@@ -34,7 +34,7 @@ const Login = () => {
               pathname: '/profile',
               query: { email2 }, // Pass the email in the query object
             });*/
-            writeCurrUser('test')
+            writeCurrUser('John')
             router.push("/profile")
           } else {
           setEmail('');

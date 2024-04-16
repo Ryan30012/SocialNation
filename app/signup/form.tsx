@@ -84,7 +84,7 @@ const SignupForm = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        writeCurrUser(formData)
+        writeCurrUser(formData.username)
         router.push("/profile")
         router.refresh()
     };

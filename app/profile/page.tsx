@@ -57,7 +57,7 @@ const ProfilePage = () => {
             <div className="p-10">
                 <div className="pl-5 flex items-center mb-4">
                     <div className="border-4 border-orange-200 rounded-full p-1">
-                    <img className="w-20 h-20 rounded-full object-cover" src={user=='staffy'?'/profilePics/1.jpg':''} alt={user!='staffy'?'No pictures yet':''} />
+                    <img className="w-20 h-20 rounded-full object-cover" src={user!='staffy'?'/profilePics/1.jpg':''} alt={user!='staffy'?'No pictures yet':''} />
                     </div>
                     <div className="flex flex-col justify-center mx-4 flex-grow">
                         <span className="text-xl font-bold text-gray-800">{user}</span>
@@ -74,7 +74,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="grid grid-cols-5 gap-4 pt-10">
-                        {user=='staffy' && ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg','1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg','1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'].map((imageName, index) => (
+                        {user!='staffy' && ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg','1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg','1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'].map((imageName, index) => (
                             <img
                             key={index}
                             src={`/profilePics/${imageName}`}

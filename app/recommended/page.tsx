@@ -39,7 +39,7 @@ const profile = () => {
   const [sent,setSent] = useState([
     {
       id: 1,
-      username: 'John',
+      username: 'Jonny',
       bio: 'Lorem ipsum dolor sit amet...',
       interests: ['Football', 'Attack on Titan', 'Game of Thrones', 'Tech'],
     }
@@ -146,11 +146,8 @@ const profile = () => {
                         {user.username}
                     </span>
                     <div>
-                        <button onClick={() => handleSentRequest(user)} className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2 transition duration-300">
-                            Accept
-                        </button>
                         <button onClick={() => handleSentRequest(null)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-300">
-                            Reject
+                            Cancel
                         </button>
                     </div>
                 </div>
